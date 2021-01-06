@@ -8,7 +8,8 @@ All the setup and install steps for Cyclic Software.
 
 ## Dependencies
 
+- bash compatible shell
+- command line tools, ala: `xcode-select --install`
 - jq
-- bash
 
 Thats all folks.

@@ -3,12 +3,19 @@ set -ex
 
 aws --version
 
+temp_template=$(date +bootstrap-%Y%m%d-%H%M.yaml)
+
+curl -s https://raw.githubusercontent.com/cyclic-software/setup/main/account/bootstrap.yaml > $temp_template
+
 aws cloudformation create-stack \
     --stack-name CyclicBootstrapStack \
-    --template-url httsp://
+    --template-body file://$temp_template
     --capabilities CAPABILITY_NAMED_IAM
 
+rm $temp_template
+
 # [--stack-policy-url <value> \
+#    --template-url httsp://
 #    --template-body file://bootstrap.yaml \
 # [--tags <value> \
 # [--parameters <value> \

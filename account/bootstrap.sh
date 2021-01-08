@@ -9,7 +9,7 @@ curl -s https://raw.githubusercontent.com/cyclic-software/setup/main/account/boo
 
 aws cloudformation create-stack \
     --stack-name CyclicBootstrapStack \
-    --template-body file://$temp_template
+    --template-body file://$temp_template \
     --capabilities CAPABILITY_NAMED_IAM
 
 rm $temp_template

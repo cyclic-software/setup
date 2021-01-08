@@ -8,7 +8,7 @@ Once per user:
 `bash <(curl -s https://raw.githubusercontent.com/cyclic-software/setup/main/setup.sh)`
 
 Once per account:
-`bash <(curl -s https://raw.githubusercontent.com/cyclic-software/setup/account/bootstrap.sh)`
+`bash <(curl -s https://raw.githubusercontent.com/cyclic-software/setup/main/account/bootstrap.sh)`
 
 ## Dependencies
 

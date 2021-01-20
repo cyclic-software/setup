@@ -9,6 +9,23 @@ echo 'Starting setup.sh'
 # git remote add aws-deploy https://git-codecommit.us-east-2.amazonaws.com/v1/repos/$REPO_NAME
 
 ls -lart ~/.ssh/
+
+if [ ! -f ~/.ssh/id_rsa ]; then
+    ssh-keygen -q -t rsa -b 4096 -C "Cyclic generated ssh public key for codecommit"
+fi
+
+# eval "$(ssh-agent -s)"
+
+# cat >> ~/.ssh/config <<'EOF'
+# Host *
+#  AddKeysToAgent yes
+#  UseKeychain yes
+#  IdentityFile ~/.ssh/id_rsa
+# EOF
+
+# ssh-add -K ~/.ssh/id_rsa
+
+
 set +e
 grep -q 'git-codecommit.*.amazonaws.com' ~/.ssh/config
 if [[ $? > 0 ]]; then

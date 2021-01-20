@@ -19,3 +19,8 @@ rm $temp_template
 #    --template-body file://bootstrap.yaml \
 # [--tags <value> \
 # [--parameters <value> \
+
+# aws cloudformation update-stack \
+#     --stack-name CyclicBootstrapStack \
+#     --capabilities CAPABILITY_NAMED_IAM \
+#     --template-body file://bootstrap.yaml

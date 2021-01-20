@@ -12,9 +12,10 @@ Once per account:
 
 ## Dependencies
 
-- bash compatible shell
-- command line tools, ala: `xcode-select --install`
-- aws cli version: ^2
-- jq
+- bash compatible shell bash, zsh, etc: `ps -p $$`
+- command line tools: `xcode-select --install`
+- aws cli version tested on `^2.1.16`
+- jq tested on `^1.6`
+- aws sam configured in your account
 
 Thats all folks.

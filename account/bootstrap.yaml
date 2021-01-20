@@ -17,6 +17,8 @@ Resources:
         Statement:
           - Action: sts:AssumeRole
             Effect: Allow
+            Principal:
+              AWS: "*"
             Condition:
               ForAnyValue:StringLike:
                 aws:PrincipalOrgPaths:

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eux
+set -ux
 
 echo 'Starting setup.sh'
 
@@ -25,8 +25,6 @@ fi
 
 # ssh-add -K ~/.ssh/id_rsa
 
-
-set +e
 grep -q 'git-codecommit.*.amazonaws.com' ~/.ssh/config
 if [[ $? > 0 ]]; then
     echo "No codecommit ssh key configured"

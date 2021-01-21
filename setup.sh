@@ -11,7 +11,8 @@ echo 'Starting setup.sh'
 ls -lart ~/.ssh/
 
 if [ ! -f ~/.ssh/id_rsa ]; then
-    ssh-keygen -q -t rsa -b 4096 -C "Cyclic generated ssh public key for codecommit"
+    echo 'Generating public/private ssh keys'
+    ssh-keygen -f '~/.ssh/id_rsa' -q -t rsa -b 4096 -C "Cyclic generated ssh public key for codecommit"
 fi
 
 # eval "$(ssh-agent -s)"
@@ -27,7 +28,7 @@ fi
 
 grep -q 'git-codecommit.*.amazonaws.com' ~/.ssh/config
 if [[ $? > 0 ]]; then
-    echo "No codecommit ssh key configured"
+    echo 'No codecommit ssh key configured. Uploading.'
 
     key_id=$(
     aws iam upload-ssh-public-key \
@@ -43,5 +44,9 @@ Host git-codecommit.*.amazonaws.com
   IdentityFile ~/.ssh/id_rsa
 EOF
     cat ~/.ssh/config_pre_cyclic_install_$(date +%Y%m%d) >> ~/.ssh/config
-
+    chmod 600 ~/.ssh/config
 fi
+
+echo 'You are now be configured. To test your ssh config you can run:'
+echo ''
+echo ' ssh git-codecommit.$AWS_DEFAULT_REGION.amazonaws.com'

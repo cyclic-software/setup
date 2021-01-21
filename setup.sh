@@ -39,6 +39,6 @@ fi
 #
 echo 'You are now be configured. To test your ssh config you can run:'
 echo ''
-echo ' ssh git-codecommit.$AWS_DEFAULT_REGION.amazonaws.com'
+echo "ssh git-codecommit.$AWS_DEFAULT_REGION.amazonaws.com"
 
 # git remote add aws-deploy https://git-codecommit.us-east-2.amazonaws.com/v1/repos/$REPO_NAME

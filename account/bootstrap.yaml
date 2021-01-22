@@ -28,7 +28,40 @@ Resources:
       MaxSessionDuration: 3600
       Path: /cyclic/
 
+  SourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub cyclic-sam-artifacts-${AWS::AccountId}
+      DeletionPolicy: Retain
+      VersioningConfiguration:
+        Status: Enabled
+
+  SourceBucketBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref SourceBucket
+      PolicyDocument:
+        Statement:
+          -
+            Action:
+              - "s3:GetObject"
+            Effect: "Allow"
+            Resource:
+              Fn::Join:
+                - ""
+                -
+                  - "arn:"
+                  - !Ref AWS::Partition
+                  - ":s3:::"
+                  - !Ref SamCliSourceBucket
+                  - "/*"
+            Principal:
+              Service: serverlessrepo.amazonaws.com
+
 Outputs:
+  BucketName:
+    Description: Artifact bucket
+    Value: !GetAtt
   RoleArn:
     Description: Cyclic management role arn
     Value: !GetAtt ManagementRole.Arn

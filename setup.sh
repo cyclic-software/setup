@@ -7,7 +7,7 @@ echo 'Starting setup.sh'
 #
 if [ ! -f ~/.ssh/id_rsa ]; then
     echo 'Generating public/private ssh keys'
-    ssh-keygen -q -t rsa -b 4096 -C "Cyclic generated ssh public key for codecommit"
+    ssh-keygen -f ~/.ssh/id_rsa -q -t rsa -b 4096 -C "Cyclic generated ssh public key for codecommit"
 fi
 
 #

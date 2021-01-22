@@ -32,7 +32,6 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Sub cyclic-sam-artifacts-${AWS::AccountId}
-      DeletionPolicy: Retain
       VersioningConfiguration:
         Status: Enabled
 
@@ -53,7 +52,7 @@ Resources:
                   - "arn:"
                   - !Ref AWS::Partition
                   - ":s3:::"
-                  - !Ref SamCliSourceBucket
+                  - !Ref SourceBucket
                   - "/*"
             Principal:
               Service: serverlessrepo.amazonaws.com
@@ -61,7 +60,7 @@ Resources:
 Outputs:
   BucketName:
     Description: Artifact bucket
-    Value: !GetAtt
+    Value: !Ref SourceBucket
   RoleArn:
     Description: Cyclic management role arn
     Value: !GetAtt ManagementRole.Arn

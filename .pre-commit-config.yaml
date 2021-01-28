@@ -1,0 +1,25 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v3.2.0
+  hooks:
+  - id: check-added-large-files
+  - id: check-json
+  - id: check-merge-conflict
+  - id: check-yaml
+  - id: end-of-file-fixer
+  - id: mixed-line-ending
+  - id: trailing-whitespace
+- repo: https://github.com/jumanjihouse/pre-commit-hooks
+  rev: master
+  hooks:
+  - id: markdownlint # Configure in .mdlrc - Check markdown files and flag style issues
+  - id: shellcheck   # Shell scripts conform to shellcheck
+  - id: shfmt        # Check shell style with shfmt
+- repo: git@github.com:yelp/detect-secrets
+  rev: v0.14.3
+  hooks:
+    - id: detect-secrets
+      args: ['--baseline', '.config/.secrets.baseline']
+      exclude: package.lock.json

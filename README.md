@@ -4,7 +4,9 @@ All the setup and install steps for Cyclic Software.
 
 ## Quick Start
 
-The fastest and easiest way to get up and running is to use [AWS CloudShell](https://console.aws.amazon.com/cloudshell/home). Your user needs cloudformation create permissions to run a template with capabilities named IAM.
+The fastest and easiest way to get up and running is to use [AWS CloudShell](https://console.aws.amazon.com/cloudshell/home).
+Your user needs cloudformation create permissions to run a template with
+capabilities named IAM.
 
 Once per user:
 
@@ -18,7 +20,8 @@ Once per account:
 bash <(curl -s https://raw.githubusercontent.com/cyclic-software/setup/main/account/bootstrap.sh)
 ```
 
-If you are running w/o an IAM user, aka with role based access you will need to run the following (per [CodeCommit Docs](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-git-remote-codecommit.html)):
+If you are running w/o an IAM user, aka with role based access you will need to
+run the following (per [CodeCommit Docs](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-git-remote-codecommit.html)):
 
 ```sh
 pip install git-remote-codecommit

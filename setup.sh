@@ -3,6 +3,19 @@
 echo 'Starting setup.sh'
 
 #
+## Install git-comit-remote auth git plugin
+#
+if command -v pip3 &> /dev/null
+then
+    pip3 install --quiet --no-input git-remote-codecommit
+elif command -v pip &> /dev/null
+then
+    pip install --quiet --no-input  git-remote-codecommit
+else
+    echo "nothing matched"
+fi
+
+#
 ## Generate SSH keys
 #
 if [ ! -f ~/.ssh/id_rsa ]; then
@@ -37,8 +50,31 @@ fi
 #
 ## Success and next steps.
 #
-echo 'You are now be configured. To test your ssh config you can run:'
-echo ''
-echo "ssh git-codecommit.$AWS_DEFAULT_REGION.amazonaws.com"
+REGION=$(aws configure get region)
+PROFILE="\$AWS_PROFILE_NAME"
+# # Need to treat blank as unset
+# if [ -n "$AWS_PROFILE" ]; then
+#   PROFILE="$AWS_PROFILE"
+# fi
 
-# git remote add aws-deploy https://git-codecommit.us-east-2.amazonaws.com/v1/repos/$REPO_NAME
+cat << EOF
+You are now be configured. To test your ssh config run:
+
+ % ssh git-codecommit.$REGION.amazonaws.com
+
+
+You can now add git remotes with ssh keys:
+
+ % git remote add cyclic ssh://git-codecommit.$REGION.amazonaws.com/v1/repos/\$REPO_NAME
+
+
+You can now add git remotes with AWS profiles (from ~/.aws/credentials):
+
+ % git remote add cyclic codecommit::$REGION://$PROFILE@\$REPO_NAME
+
+
+EOF
+
+
+# git remote add cyclic https://git-codecommit.$REGION.amazonaws.com/v1/repos/$REPO_NAME
+# git remote add cyclic codecommit::$AWS_DEFAULT_REGION://$AWS_PROFILE_NAME@$REPO_NAME

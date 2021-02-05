@@ -3,14 +3,15 @@ set -ex
 
 aws --version
 
-temp_template=$(date +bootstrap-%Y%m%d-%H%M.yaml)
+temp_template=$(date +bootstrap-%Y%m%d-%H%M%S.yaml)
 
 curl -s https://raw.githubusercontent.com/cyclic-software/setup/main/account/bootstrap.yaml >$temp_template
 
 aws cloudformation create-stack \
-	--stack-name CyclicBootstrapStack \
+	--stack-name CyclicAppManagementStack \
 	--capabilities CAPABILITY_NAMED_IAM \
-	--template-body file://$temp_template
+	--template-body file://$temp_template \
+	--notification-arns arn:aws:sns:us-east-2:758562997317:test-cloudformation-notification
 
 rm $temp_template
 
